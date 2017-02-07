@@ -4,44 +4,45 @@
 var express = require('express');
 var router = express.Router();
 
-var DiarySchema = require('../models/class');
+var SubjectSchema = require('../../models/class');
 
 router.get('/', function (req, res, next) {
-    DiarySchema.find({}).populate('children').exec(function (err, diary) {
+    SubjectSchema.find({}).populate('teacher').exec(function (err, sebjects) {
         if (err) {
             res.send(err);
         } else {
-            res.json(diary);
+            res.json(sebjects);
         }
     });
 });
 
 router.get('/:id', function (req, res, next) {
-    DiarySchema.findOne({_id: req.params.id}).populate('children').exec(function (err, diary) {
+    SubjectSchema.findOne({_id: req.params.id}).populate('teacher').exec(function (err, subject) {
         if (err) {
             res.send(err);
         } else {
-            res.json(diary);
+            res.json(subject);
         }
     });
 });
 
 router.post('/', function (req, res, next) {
-    var diary = DiarySchema({
-        children: req.body.children
+    var subject = SubjectSchema({
+        title: req.body.title,
+        teacher: req.body.teacher
     });
 
-    diary.save(function (err) {
+    subject.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.json(diary);
+            res.json(subject);
         }
     });
 });
 
 router.delete('/:id', function (req, res, next) {
-    DiarySchema.findByIdAndRemove(req.params.id, function (err) {
+    SubjectSchema.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -51,18 +52,18 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    DiarySchema.findById(req.params.id, function (err, diary) {
+    SubjectSchema.findById(req.params.id, function (err, subject) {
         if (err) {
             res.send(err)
         } else {
-            diary.notes = req.body.notes;
-            diary.children = req.body.children;
+            subject.title = req.body.title;
+            subject.teacher = req.body.teacher;
 
-            diary.save(function (err) {
+            subject.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json(diary);
+                    res.json(subject);
                 }
             });
         }

@@ -4,51 +4,49 @@
 var express = require('express');
 var router = express.Router();
 
-var ParentSchema = require('../models/child');
+var TeacherSchema = require('../../models/class');
 
 router.get('/', function (req, res, next) {
-    ParentSchema.find({}).populate('childrens').exec(function (err, parents) {
+    TeacherSchema.find({}).populate('subjects').exec(function (err, teachers) {
         if (err) {
             res.send(err);
         } else {
-            res.json(parents);
+            res.json(teachers);
         }
     });
 });
 
 router.get('/:id', function (req, res, next) {
-    ParentSchema.findOne({_id: req.params.id}).populate('childrens').exec(function (err, parent) {
+    TeacherSchema.findOne({_id: req.params.id}).populate('subjects').exec(function (err, teacher) {
         if (err) {
             res.send(err);
         } else {
-            res.json(parent);
+            res.json(teacher);
         }
     });
 });
 
 router.post('/', function (req, res, next) {
-    var parent = ParentSchema({
+    var teacher = TeacherSchema({
         password: req.body.password,
         email: req.body.email,
         name: req.body.name,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
-        childrens: req.body.childrens
+        subjects: req.body.subjects
     });
 
-    parent.save(function (err) {
+    teacher.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.json(parent);
+            res.json(teacher);
         }
     });
-
-
 });
 
 router.delete('/:id', function (req, res, next) {
-    ParentSchema.findByIdAndRemove(req.params.id, function (err) {
+    TeacherSchema.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -58,24 +56,23 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    ParentSchema.findById(req.params.id, function (err, parent) {
+    TeacherSchema.findById(req.params.id, function (err, teacher) {
         if (err) {
             res.send(err)
         } else {
-            parent.password = req.body.password;
-            parent.email = req.body.email;
-            parent.name = req.body.name;
-            parent.lastName = req.body.lastName;
-            parent.phoneNumber = req.body.phoneNumber;
-            parent.childrens = req.body.childrens;
+            teacher.password = req.body.password;
+            teacher.email = req.body.email;
+            teacher.name = req.body.name;
+            teacher.lastName = req.body.lastName;
+            teacher.phoneNumber = req.body.phoneNumber;
+            teacher.subjects = req.body.subjects;
 
-            parent.save(function (err) {
+            teacher.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json(parent);
+                    res.json(teacher);
                 }
-
             });
         }
     });

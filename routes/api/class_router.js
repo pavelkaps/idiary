@@ -4,45 +4,45 @@
 var express = require('express');
 var router = express.Router();
 
-var SubjectSchema = require('../models/class');
+var ClassSchema = require('../../models/class');
 
 router.get('/', function (req, res, next) {
-    SubjectSchema.find({}).populate('teacher').exec(function (err, sebjects) {
+    ClassSchema.find({}).populate('childrens').exec(function (err, classes) {
         if (err) {
             res.send(err);
         } else {
-            res.json(sebjects);
+            res.json(classes);
         }
     });
 });
 
 router.get('/:id', function (req, res, next) {
-    SubjectSchema.findOne({_id: req.params.id}).populate('teacher').exec(function (err, subject) {
+    ClassSchema.findOne({_id: req.params.id}).populate('childrens').exec(function (err, _class) {
         if (err) {
             res.send(err);
         } else {
-            res.json(subject);
+            res.json(_class);
         }
     });
 });
 
 router.post('/', function (req, res, next) {
-    var subject = SubjectSchema({
+    var _class = ClassSchema({
         title: req.body.title,
-        teacher: req.body.teacher
+        childrens: req.body.childrens
     });
 
-    subject.save(function (err) {
+    _class.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.json(subject);
+            res.json(_class);
         }
     });
 });
 
 router.delete('/:id', function (req, res, next) {
-    SubjectSchema.findByIdAndRemove(req.params.id, function (err) {
+    ClassSchema.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -52,18 +52,18 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    SubjectSchema.findById(req.params.id, function (err, subject) {
+    ClassSchema.findById(req.params.id, function (err, _class) {
         if (err) {
             res.send(err)
         } else {
-            subject.title = req.body.title;
-            subject.teacher = req.body.teacher;
+            _class.title = req.body.title;
+            _class.childrens = req.body.childrens;
 
-            subject.save(function (err) {
+            _class.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json(subject);
+                    res.json(_class);
                 }
             });
         }

@@ -4,49 +4,49 @@
 var express = require('express');
 var router = express.Router();
 
-var TeacherSchema = require('../models/class');
+var AdminSchema = require('../../models/admin');
+
 
 router.get('/', function (req, res, next) {
-    TeacherSchema.find({}).populate('subjects').exec(function (err, teachers) {
+    AdminSchema.find({}, function (err, admins) {
         if (err) {
             res.send(err);
         } else {
-            res.json(teachers);
+            res.json(admins);
         }
     });
 });
 
 router.get('/:id', function (req, res, next) {
-    TeacherSchema.findOne({_id: req.params.id}).populate('subjects').exec(function (err, teacher) {
+
+    AdminSchema.findById(req.params.id, function (err, admin) {
         if (err) {
             res.send(err);
         } else {
-            res.json(teacher);
+            res.json(admin);
         }
     });
 });
 
 router.post('/', function (req, res, next) {
-    var teacher = TeacherSchema({
+    var admin = AdminSchema({
         password: req.body.password,
         email: req.body.email,
         name: req.body.name,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        subjects: req.body.subjects
+        lastName: req.body.lastName
     });
 
-    teacher.save(function (err) {
+    admin.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.json(teacher);
+            res.json(admin);
         }
     });
 });
 
 router.delete('/:id', function (req, res, next) {
-    TeacherSchema.findByIdAndRemove(req.params.id, function (err) {
+    AdminSchema.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -56,23 +56,23 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    TeacherSchema.findById(req.params.id, function (err, teacher) {
+
+    AdminSchema.findById(req.params.id, function (err, admin) {
         if (err) {
             res.send(err)
         } else {
-            teacher.password = req.body.password;
-            teacher.email = req.body.email;
-            teacher.name = req.body.name;
-            teacher.lastName = req.body.lastName;
-            teacher.phoneNumber = req.body.phoneNumber;
-            teacher.subjects = req.body.subjects;
+            admin.password = req.body.password;
+            admin.email = req.body.email;
+            admin.name = req.body.name;
+            admin.lastName = req.body.lastName;
 
-            teacher.save(function (err) {
+            admin.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json(teacher);
+                    res.json(admin);
                 }
+
             });
         }
     });

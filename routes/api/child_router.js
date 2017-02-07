@@ -4,8 +4,8 @@
 var express = require('express');
 var router = express.Router();
 
-var ChildSchema = require('../models/child');
-var DiarySchema = require('../models/diary');
+var ChildSchema = require('../../models/child');
+var DiarySchema = require('../../models/diary');
 
 router.get('/', function (req, res, next) {
     ChildSchema.find({}).populate('diary parents').exec(function (err, childrens) {

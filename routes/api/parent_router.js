@@ -4,49 +4,51 @@
 var express = require('express');
 var router = express.Router();
 
-var AdminSchema = require('../models/admin');
-
+var ParentSchema = require('../../models/child');
 
 router.get('/', function (req, res, next) {
-    AdminSchema.find({}, function (err, admins) {
+    ParentSchema.find({}).populate('childrens').exec(function (err, parents) {
         if (err) {
             res.send(err);
         } else {
-            res.json(admins);
+            res.json(parents);
         }
     });
 });
 
 router.get('/:id', function (req, res, next) {
-
-    AdminSchema.findById(req.params.id, function (err, admin) {
+    ParentSchema.findOne({_id: req.params.id}).populate('childrens').exec(function (err, parent) {
         if (err) {
             res.send(err);
         } else {
-            res.json(admin);
+            res.json(parent);
         }
     });
 });
 
 router.post('/', function (req, res, next) {
-    var admin = AdminSchema({
+    var parent = ParentSchema({
         password: req.body.password,
         email: req.body.email,
         name: req.body.name,
-        lastName: req.body.lastName
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        childrens: req.body.childrens
     });
 
-    admin.save(function (err) {
+    parent.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.json(admin);
+            res.json(parent);
         }
     });
+
+
 });
 
 router.delete('/:id', function (req, res, next) {
-    AdminSchema.findByIdAndRemove(req.params.id, function (err) {
+    ParentSchema.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -56,21 +58,22 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-
-    AdminSchema.findById(req.params.id, function (err, admin) {
+    ParentSchema.findById(req.params.id, function (err, parent) {
         if (err) {
             res.send(err)
         } else {
-            admin.password = req.body.password;
-            admin.email = req.body.email;
-            admin.name = req.body.name;
-            admin.lastName = req.body.lastName;
+            parent.password = req.body.password;
+            parent.email = req.body.email;
+            parent.name = req.body.name;
+            parent.lastName = req.body.lastName;
+            parent.phoneNumber = req.body.phoneNumber;
+            parent.childrens = req.body.childrens;
 
-            admin.save(function (err) {
+            parent.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json(admin);
+                    res.json(parent);
                 }
 
             });

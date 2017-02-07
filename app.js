@@ -6,9 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
+var indexRouting = require('./routes/index');
 var books = require('./routes/books_mongodb');
-var indexText = require('./routes/indexTest');
 
 var app = express();
 
@@ -29,15 +28,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app')));
 
 app.use('/store', books);
-indexText(app);
+indexRouting(app);
 
 var renderIndex = function (req, res) {
   res.sendFile(path.resolve(__dirname, '/app/index.html'));
 };
 
 app.get('/*', renderIndex);
-
-app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

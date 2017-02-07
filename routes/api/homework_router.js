@@ -4,45 +4,47 @@
 var express = require('express');
 var router = express.Router();
 
-var ClassSchema = require('../models/class');
+var HomeworkSchema = require('../../models/class');
 
 router.get('/', function (req, res, next) {
-    ClassSchema.find({}).populate('childrens').exec(function (err, classes) {
+    HomeworkSchema.find({}).populate('children subject').exec(function (err, _home) {
         if (err) {
             res.send(err);
         } else {
-            res.json(classes);
+            res.json(_home);
         }
     });
 });
 
 router.get('/:id', function (req, res, next) {
-    ClassSchema.findOne({_id: req.params.id}).populate('childrens').exec(function (err, _class) {
+    HomeworkSchema.findOne({_id: req.params.id}).populate('children subject').exec(function (err, _home) {
         if (err) {
             res.send(err);
         } else {
-            res.json(_class);
+            res.json(_home);
         }
     });
 });
 
 router.post('/', function (req, res, next) {
-    var _class = ClassSchema({
+    var _home_work = HomeworkSchema({
         title: req.body.title,
-        childrens: req.body.childrens
+        description: req.body.description,
+        subject: req.body.subject,
+        children: req.body.children
     });
 
-    _class.save(function (err) {
+    _home_work.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.json(_class);
+            res.json(_home_work);
         }
     });
 });
 
 router.delete('/:id', function (req, res, next) {
-    ClassSchema.findByIdAndRemove(req.params.id, function (err) {
+    HomeworkSchema.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -52,18 +54,20 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    ClassSchema.findById(req.params.id, function (err, _class) {
+    HomeworkSchema.findById(req.params.id, function (err, _home) {
         if (err) {
             res.send(err)
         } else {
-            _class.title = req.body.title;
-            _class.childrens = req.body.childrens;
+            _home.title = req.body.title;
+            _home.description = req.body.description;
+            _home.subject = req.body.subject;
+            _home.children = req.body.children;
 
-            _class.save(function (err) {
+            _home.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json(_class);
+                    res.json(_home);
                 }
             });
         }
