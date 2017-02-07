@@ -41,7 +41,7 @@ meanApp
     │    │    │    ├── books.component.html
     │    │    │    ├── books.component.ts
     │    ├── services
-    │    │    ├── book.service.ts            <= Book Service for fetching api
+    │    │    ├── book.service.ts            <= ParentSchema Service for fetching api
     │    │    ├── update-book.service.ts     <= Notify controllers when book added
     │    ├── assets
     │    │    ├── css
@@ -63,8 +63,8 @@ meanApp
     ├── models
     │    ├── book.js
     ├── routes
-    │    ├── books_mongodb.js  <= Book API with mongoDB
-    │    ├── book_mysql.js     <= Book API with MYSQL
+    │    ├── books_mongodb.js  <= ParentSchema API with mongoDB
+    │    ├── book_mysql.js     <= ParentSchema API with MYSQL
     │    ├── index.js
     ├── views
     ├── package.json
