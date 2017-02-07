@@ -13,7 +13,7 @@ var bookSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a models using it
-var Book = mongoose.model('Book', bookSchema);
+var Book = mongoose.model('BookSchema', bookSchema);
 
 // make this available to our users in our Node applications
 module.exports = Book;
