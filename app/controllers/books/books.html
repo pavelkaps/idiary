@@ -1,0 +1,24 @@
+<h2>Books</h2>
+<ul class="books">
+  <li ng-repeat="book in books" ng-class="{'selected': book===selectedBook} " ng-click="onSelect(book)">
+    <span class="badge">{{book._id}}</span>
+    <span>{{book.title}}</span>
+    <button class="delete" ng-click="deleteBook(book)">x</button>
+  </li>
+</ul>
+
+<div ng-show="selectedBook">
+  <h2>
+    {{selectedBook.title | uppercase}}
+  </h2>
+  <button ng-click="gotoDetail()">View Details</button>
+</div>
+
+<div ng-include src="'../controllers/add-book/add-book.html'" ng-controller="AddBookCtrl"></div>
+
+
+<!-- 
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

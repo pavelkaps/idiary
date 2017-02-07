@@ -1,0 +1,32 @@
+<form name="bookForm" novalidate class="simple-form">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <label>Title</label>
+            </td>
+            <td>
+                <input type="text" ng-model="book.title">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Author</label>
+            </td>
+            <td>
+                <input type="text" ng-model="book.author">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Year</label>
+            </td>
+            <td>
+                <input type="number" ng-model="book.year" >
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" ng-click="updateBook(book)">Add</button>
+</form>

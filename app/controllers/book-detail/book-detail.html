@@ -1,0 +1,25 @@
+<div ng-show="book">
+  <h2>{{book.title}} details!</h2>
+  <div>
+    <label>id: </label>{{book._id}}</div>
+  <div>
+    <label>title: </label>
+    <input ng-model="book.title" placeholder="title" />
+  </div>
+  <div>
+    <label>year: </label>
+    <input ng-model="book.year" placeholder="year" />
+  </div>
+  <div>
+    <label>author: </label>
+    <input ng-model="book.author" placeholder="author" />
+  </div>
+  <button ng-click="goBack()">Back</button>
+  <button ng-click="saveBook()">Save</button>
+</div>
+
+<!-- 
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

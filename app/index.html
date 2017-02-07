@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" ng-app="bookStore">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <title>Book Store</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <h1>Book Store</h1>
+  <nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/books">Books</a>
+  </nav>
+  <ng-view></ng-view>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-css/angular-css.min.js"></script>
+
+  <script src="app.js"></script>
+  <script src="config/route/app.routing.js"></script>
+  <script src="services/book-service.js"></script>
+  <script src="services/update-book.js"></script>
+
+  <script src="controllers/dashboard/dashboard.controller.js"></script>
+  <script src="controllers/books/books.controller.js"></script>
+  <script src="controllers/book-detail/book-detail.controller.js"></script>
+  <script src="controllers/add-book/add-book.controller.js"></script>
+
+</body>
+</html>
