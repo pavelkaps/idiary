@@ -27,7 +27,7 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', function (req, res, next){
     var child = ChildSchema({
         password: req.body.password,
         email: req.body.email,
@@ -50,6 +50,7 @@ router.post('/', function (req, res, next) {
                 if (err) {
                     res.send(err);
                 } else {
+                    console.log(child);
                     res.json(child);
                 }
             });

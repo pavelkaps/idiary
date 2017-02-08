@@ -1,0 +1,74 @@
+<ul class="books">
+    <li ng-repeat="parent in parents" ng-class="{'selected': parent === selectParent } " ng-click="onSelect(parent)">
+        <span class="badge">{{parent._id}}</span>
+        <span>{{parent.name + " " + parent.lastName}}</span>
+        <button class="delete" ng-click="deleteParent(parent)">x</button>
+    </li>
+</ul>
+
+<div ng-show="selectParent">
+    <p>
+        Password: {{selectParent.password}}
+    </p>
+    <p>
+        Email: {{selectParent.email}}
+    </p>
+    <p>
+        Name: {{selectParent.name}}
+    </p>
+    <p>
+        LastName: {{selectParent.lastName}}
+    </p>
+    <p>
+        Number Phone: {{selectParent.phoneNumber}}
+    </p>
+</div>
+
+<form name="parentForm" novalidate class="simple-form">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <label>Password</label>
+            </td>
+            <td>
+                <input type="text" ng-model="parent.password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email</label>
+            </td>
+            <td>
+                <input type="text" ng-model="parent.email">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Name</label>
+            </td>
+            <td>
+                <input type="text" ng-model="parent.name" >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Last Name</label>
+            </td>
+            <td>
+                <input type="text" ng-model="parent.lastName" >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Phone Number</label>
+            </td>
+            <td>
+                <input type="tel" ng-model="parent.phoneNumber" >
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" ng-click="addParent(parent)">Add</button>
+</form>

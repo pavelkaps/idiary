@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 
-var SubjectSchema = require('../../models/class');
+var SubjectSchema = require('../../models/subject');
 
 router.get('/', function (req, res, next) {
     SubjectSchema.find({}).populate('teacher').exec(function (err, sebjects) {

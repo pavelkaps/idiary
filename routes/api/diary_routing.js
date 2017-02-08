@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 
-var DiarySchema = require('../../models/class');
+var DiarySchema = require('../../models/diary');
 
 router.get('/', function (req, res, next) {
     DiarySchema.find({}).populate('children').exec(function (err, diary) {

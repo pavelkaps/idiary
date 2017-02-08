@@ -1,0 +1,74 @@
+<ul class="books">
+    <li ng-repeat="child in childs" ng-class="{'selected': child === selectClass } " ng-click="onSelect(child)">
+        <span class="badge">{{child._id}}</span>
+        <span>{{child.name + " " + child.lastName}}</span>
+        <button class="delete" ng-click="deleteChild(child)">x</button>
+    </li>
+</ul>
+
+<div ng-show="selectChild">
+    <p>
+        Password: {{selectChild.password}}
+    </p>
+    <p>
+        Email: {{selectChild.email}}
+    </p>
+    <p>
+        Name: {{selectChild.name}}
+    </p>
+    <p>
+        LastName: {{selectChild.lastName}}
+    </p>
+    <p>
+        Number Phone: {{selectChild.phoneNumber}}
+    </p>
+</div>
+
+<form name="childForm" novalidate class="simple-form">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <label>Password</label>
+            </td>
+            <td>
+                <input type="text" ng-model="child.password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email</label>
+            </td>
+            <td>
+                <input type="text" ng-model="child.email">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Name</label>
+            </td>
+            <td>
+                <input type="text" ng-model="child.name" >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Last Name</label>
+            </td>
+            <td>
+                <input type="text" ng-model="child.lastName" >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Phone Number</label>
+            </td>
+            <td>
+                <input type="tel" ng-model="child.phoneNumber" >
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" ng-click="addChild(child)">Add</button>
+</form>

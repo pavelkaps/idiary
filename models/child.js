@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var childSchema = new Schema({
-    password: Number,
+    password: String,
     email: String,
 
     name: String,

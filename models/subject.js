@@ -13,6 +13,6 @@ var subjectSchema = new Schema({
     }
 });
 
-var Teacher = mongoose.model('Subject', teacherSchema);
+var Subject = mongoose.model('Subject', subjectSchema);
 
-module.exports = Teacher;
+module.exports = Subject;
