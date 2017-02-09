@@ -1,0 +1,30 @@
+<ul class="books">
+    <li ng-repeat="class in classes" ng-class="{'selected': class === selectClass } " ng-click="onSelect(class)">
+        <span class="badge">{{class._id}}</span>
+        <span>{{class.title}}</span>
+        <button class="delete" ng-click="deleteClass(class)">x</button>
+    </li>
+</ul>
+
+<div ng-show="selectChild">
+    <p>
+        Title: {{selectChild.password}}
+    </p>
+</div>
+
+<form name="classForm" novalidate class="simple-form">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <label>Title</label>
+            </td>
+            <td>
+                <input type="text" ng-model="class.title">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" ng-click="addClass(class)">Add</button>
+</form>

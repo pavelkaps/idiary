@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var indexRouting = require('./routes/index');
+var books = require('./routes/books_mongodb');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app')));
 
+app.use('/store', books);
 indexRouting(app);
 
 var renderIndex = function (req, res) {

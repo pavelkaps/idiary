@@ -10,6 +10,8 @@
   <h1>Admin Panel</h1>
 
   <nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/books">Books</a>
     <a href="/child">Child</a>
     <a href="/class">Class</a>
     <a href="/parent">Parent</a>
@@ -25,10 +27,17 @@
   <script src="app.js"></script>
   <script src="config/route/app.routing.js"></script>
   <script src="services/api/admin-service.js"></script>
+  <script src="services/update-book.js"></script>
+
   <script src="services/api/child-service.js"></script>
   <script src="services/api/class-service.js"></script>
   <script src="services/api/parent-service.js"></script>
   <script src="services/api/teacher-service.js"></script>
+
+  <script src="controllers/dashboard/dashboard.controller.js"></script>
+  <script src="controllers/books/books.controller.js"></script>
+  <script src="controllers/book-detail/book-detail.controller.js"></script>
+  <script src="controllers/add-book/add-book.controller.js"></script>
 
 
   <script src="controllers/admin-controllers/child-controller/child.controller.js"></script>
